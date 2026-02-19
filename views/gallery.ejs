@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/script.js"></script>
+    <style>
+      .comment-section {
+            margin-top: 20px;
+            padding: 15px;
+            width: 70%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+        }
+        .comment-section h4 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        .comment-form {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .comment-input {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+        .comment-btn {
+            padding: 8px 15px;
+            background: pink;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        .comment-btn:hover {
+            background:palevioletred;
+        }
+        .comments-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .comments-list div {
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .comments-list div:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+    <div class="logo">Creativity Hub </div>
+    <nav>
+        <a href="http://localhost:3000/creativity_hub#home" onclick="scrollToHome()">Home</a>
+        <% if (user) { %>
+        <a href="/logout"> Logout </a>
+        <% } else { %>
+        <a href="/creativity_hub/login"> Login </a>
+        <% } %>
+        <a href="/creativity_hub/upload">Upload</a>
+        <a href="http://localhost:3000/creativity_hub#about" onclick="scrollToAbout()">About</a>
+        
+    </nav>
+</header>
+     <h4>Creative Window</h4>
+    <div class="gallery">
+        <%uploadImage.forEach(img =>{%>
+        <% let commentsJson = JSON.stringify(img.comments) %>
+        <div class="card">
+            <img src ="<%=img.imageURL%>" alt="<%=img.name%>"
+            onclick="openModal(this)"
+            data-id="<%=img._id%>"
+            data-url="<%=img.imageURL%>"
+            data-likes="<%=img.likes.length%>"
+            data-comments="<%= commentsJson.replace(/'/g, '\\\'') %>"
+            data-owner="<%=img.user._id%>"
+            class="thumb"/>
+            <h3><%=img.name%></h3>
+            <p><%=img.thought%></p>
+            <p><%=img.likes.length%> likes</p>
+        </div>
+        <%})%>
+    </div>
+    <div id="imageModal" class="modal">
+  <span class="close" onclick="closeModal()">×</span>
+  <div class="modal-body">
+    <img id="modalImage" class="modal-content">
+
+    <div class="actions">
+      <form id="likeForm" action="" method="post" style="display:inline;">
+        <button type="submit">❤️ Like (<span id="likeCount">0</span>)</button>
+      </form>
+      <button onclick="toggleComment()">💬 Comment</button>
+      <button onclick="shareImage()">🔗 Share</button>
+      <a id="downloadBtn" download>
+        <button>⬇ Download</button>
+      </a>
+      <button id="editBtn" onclick="editPost()" style="display:inline;">Edit</button>
+      <form id="deleteForm" action="" method="post" style="display:inline;">
+        <button type="submit" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+      </form>
+    </div>
+    <div id="commentSection" style="display:none;" class="comment-section">
+      <h4>Comments</h4>
+      <form id="commentForm" action="" method="post" class="comment-form">
+        <input type="text" name="comment" placeholder="Add a comment..." required class="comment-input">
+        <button type="submit" class="comment-btn">Post</button>
+      </form>
+      <div id="commentsList" class="comments-list">
+        <!-- Comments will be populated here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer style=" background-color: white; ">
+    <p style="font-weight: bold; text-align:center; justify-content: center; display: flex; align-items: center; padding: 15px 40px; position:sticky; top:0; z-index: 100;
+    box-shadow: 3px 3px 3px 3px rgb(240, 197, 211);">
+        Built with ❤️ by Creativity Hub 🌸
+        © 2026 Creativity Hub :)
+    </p>
+</footer>
+</body>
+</html>

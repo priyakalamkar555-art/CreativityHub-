@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body> 
+    <header>
+    <div class="logo">Creativity Hub </div>
+    <nav>
+        <a href="http://localhost:3000/creativity_hub#home" onclick="scrollToHome()">Home</a>
+        <% if (user) { %>
+        <a href="/logout"> Logout </a>
+        <% } else { %>
+        <a href="/creativity_hub/login"> Login </a>
+        <% } %>
+        <a href="/creativity_hub/upload">Upload</a>
+        <a href="http://localhost:3000/creativity_hub#about" onclick="scrollToAbout()">About</a>
+        
+    </nav>
+</header>
+    <div class="container">   
+    <form action="/creativity_hub/edit/<%=post._id%>" method="post">
+         <h2>Edit Your Post</h2> 
+        <input class="block" type="text" placeholder="Creator Name" name="name" value="<%=post.name%>" required><br><br>
+        <textarea class="block" type="text" placeholder="Thoughts" name="thought" required><%=post.thought%></textarea><br><br>
+        <button class="btn" type="submit">Update</button>
+    </form>
+    </div> 
+    <br><br>
+    <footer style=" background-color: white; ">
+    <p style="font-weight: bold; text-align:center; justify-content: center; display: flex; align-items: center; padding: 15px 40px; position:sticky; top:0; z-index: 100;
+    box-shadow: 3px 3px 3px 3px rgb(240, 197, 211);">
+        Built with ❤️ by Creativity Hub 🌸
+        © 2026 Creativity Hub :)
+    </p>
+</footer>
+</body>
+</html>

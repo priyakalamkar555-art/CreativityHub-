@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+    <div class="logo">Creativity Hub </div>
+    <nav>
+        <a href="http://localhost:3000/creativity_hub#home" onclick="scrollToHome()">Home</a>
+        <a href="/creativity_hub/login"> Login </a>
+        <a href="/creativity_hub/signup"> Sign up </a>
+        <a href="/creativity_hub/upload">Upload</a>
+        <a href="http://localhost:3000/creativity_hub#about" onclick="scrollToAbout()">About</a>
+        
+    </nav>
+</header>
+    <div class="container_2">
+        
+    <form action="/creativity_hub/signup" method="post">
+        <h1>Create New Account</h1>
+         <% if (message) { %>
+         <p style="color: pink; text-align: center;"><%= message %></p>
+         <% } %>
+         <br>
+        <label>Username:</label><input class="box" type="text" placeholder="Enter Your Username" name="username"><br><br>
+        <label>Email:</label><input class="box" type="text" placeholder="Enter Your Email" name="email"><br><br>
+        <label>Password:</label><input class="box" type="text" placeholder="Enter Your Password" name="password"><br><br>
+        <button class="btn" type="submit">Submit</button>
+        <p class="pr">Already have an account ? <a href="/creativity_hub/login">login</a></p>
+    </form>
+    </div>
+    <br><br>
+    <footer style=" background-color: white; ">
+    <p style="font-weight: bold; text-align:center; justify-content: center; display: flex; align-items: center; padding: 15px 40px; position:sticky; top:0; z-index: 100;
+    box-shadow: 3px 3px 3px 3px rgb(240, 197, 211);">
+        Built with ❤️ by Creativity Hub 🌸
+        © 2026 Creativity Hub :)
+    </p>
+</footer>
+</body>
+</html>
