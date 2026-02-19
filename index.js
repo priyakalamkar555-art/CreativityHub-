@@ -205,11 +205,13 @@ app.post('/creativity_hub/delete/:postId', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
+mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/creativityHub')
+.then(() => {
     console.log('MongoDB Connected');
 
     app.listen(PORT, () => {
         console.log(`Server Working on Port ${PORT}`);
     });
+
 })
 .catch(err => console.log(err));
